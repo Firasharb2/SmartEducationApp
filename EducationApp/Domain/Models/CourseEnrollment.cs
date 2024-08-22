@@ -15,7 +15,6 @@
         public int UserId { get; set; }
 
         public DateTime EnrolledAt { get; set; }
-        public double Progress { get; set; }
         public string Grade { get; set; }
         public string CertificateUrl { get; set; }
         public DateTime? CompletedAt { get; set; }

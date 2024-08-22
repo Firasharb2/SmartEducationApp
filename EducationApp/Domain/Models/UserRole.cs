@@ -4,6 +4,6 @@
     {
         Student,
         Instructor,
-        Admin
+        SuperAdmin
     }
 }

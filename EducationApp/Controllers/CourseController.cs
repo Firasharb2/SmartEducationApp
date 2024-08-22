@@ -25,7 +25,6 @@ namespace EducationApp.Controllers
         {
             var courses = await _context.Courses
                 .Include(c => c.Instructor) // Include related entities if needed
-                .Include(c => c.Category)
                 .ToListAsync();
             return Ok(courses);
         }
@@ -35,7 +34,6 @@ namespace EducationApp.Controllers
         {
             var course = await _context.Courses
                 .Include(c => c.Instructor)
-                .Include(c => c.Category)
                 .FirstOrDefaultAsync(c => c.CourseId == id);
 
             if (course == null)
