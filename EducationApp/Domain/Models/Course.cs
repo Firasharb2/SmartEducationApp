@@ -11,6 +11,9 @@
         public string Title { get; set; }
         public string Description { get; set; }
         public string Syllabus { get; set; }
+        public string ImageUrl { get; set; }
+        public string Url { get; set; }
+
 
         [ForeignKey("Instructor")] // Foreign Key
         public int InstructorId { get; set; } // Foreign Key to User
