@@ -16,7 +16,6 @@
         public DateTime LinkedAt { get; set; }
 
         // Navigation property
-        public User User { get; set; }
     }
 
 }

@@ -1,4 +1,5 @@
 using EducationApp.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using System.Text;
@@ -7,33 +8,29 @@ namespace EducationApp.Controllers
 {
     
     [ApiController]
-    [Route("student")]
-    public class StudentController : ControllerBase
+    [Route("keycloak-management")]
+    public class KeycloakManagementController : ControllerBase
     {
         private readonly IStudentsService _studentsService;
+        private string _userId;  
+        private readonly ILogger<KeycloakManagementController> _logger;
 
-       
-        private readonly ILogger<StudentController> _logger;
-
-        public StudentController(ILogger<StudentController> logger, IStudentsService studentsService)
+        public KeycloakManagementController(ILogger<KeycloakManagementController> logger, IStudentsService studentsService, IHttpContextAccessor httpContextAccessor)
         {
             _logger = logger;
             _studentsService = studentsService;
-        }
+            _userId = httpContextAccessor?.HttpContext?.User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
 
-        [HttpGet("get-student-count")]
-        public async Task<int> Get()
-        {
-            return  await _studentsService.GetStudentsCount();         
         }
 
 
         [HttpGet("assign-student-role")]
         public async Task AssignStudentRole()
         {
+
             var token = await GetTokenFromAdminCLI();
             using var client = new HttpClient();
-            var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:8090/admin/realms/educapp/users/720e8d65-aaf0-4da3-989e-563481183414/role-mappings/realm");
+            var request = new HttpRequestMessage(HttpMethod.Post, $"http://localhost:8090/admin/realms/educapp/users/{_userId}/role-mappings/realm");
             request.Headers.Add("Authorization", $"Bearer {token}");
             var content = new StringContent("[{\r\n        \"id\": \"c6098017-e89f-423f-bb8c-71c3c9964cba\",\r\n        \"name\": \"Student\"\r\n      }]", null, "application/json");
             request.Content = content;
@@ -48,7 +45,7 @@ namespace EducationApp.Controllers
         {
             var token = await GetTokenFromAdminCLI();
             using var client = new HttpClient();
-            var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:8090/admin/realms/educapp/users/720e8d65-aaf0-4da3-989e-563481183414/role-mappings/realm");
+            var request = new HttpRequestMessage(HttpMethod.Post, $"http://localhost:8090/admin/realms/educapp/users/{_userId}/role-mappings/realm");
             request.Headers.Add("Authorization", $"Bearer {token}");
             var content = new StringContent("[{\r\n        \"id\": \"9fc372c1-e94a-4d7b-9731-c4944f2d238e\",\r\n        \"name\": \"Instructor\"\r\n      }]", null, "application/json");
             request.Content = content;
@@ -58,8 +55,30 @@ namespace EducationApp.Controllers
 
         }
 
+        [HttpGet("get-users")]
+        public async Task<List<KeycloakUser>> KeycloakUsers()
+        {
+            var token = await GetTokenFromAdminCLI();
+            using var client = new HttpClient();
+            var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost:8090/admin/realms/educapp/users");
+            request.Headers.Add("Authorization", $"Bearer {token}");
+            var response = await client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+            var responseContent = await response.Content.ReadAsStringAsync();
+            var users = JArray.Parse(responseContent).ToObject<List<KeycloakUser>>();
+            return users;
+        }
 
-
+        [HttpDelete("delete-user/{userId}")]
+        public async Task DeleteUser(string userId)
+        {
+            var token = await GetTokenFromAdminCLI();
+            using var client = new HttpClient();
+            var request = new HttpRequestMessage(HttpMethod.Delete, $"http://localhost:8090/admin/realms/educapp/users/{userId}");
+            request.Headers.Add("Authorization", $"Bearer {token}");
+            var response = await client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+        }   
 
         private async Task<string> GetTokenFromAdminCLI()
         {
@@ -86,5 +105,11 @@ namespace EducationApp.Controllers
 
             return token;
         }
+    }
+
+    public class KeycloakUser
+    {
+        public string Id { get; set; }
+        public string UserName{ get; set; }
     }
 }

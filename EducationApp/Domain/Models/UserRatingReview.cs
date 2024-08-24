@@ -21,7 +21,6 @@
 
         // Navigation properties
         public Course Course { get; set; }
-        public User User { get; set; }
     }
 
 }

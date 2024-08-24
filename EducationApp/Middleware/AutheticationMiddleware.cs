@@ -16,10 +16,12 @@
         {
             try
             {
+
                 var request = httpContext.Request;
 
                 // First setup the userSession, then call next middleware
                 _logger.LogInformation("<AutheticationMiddleware><InvokeAsync> Checking user session {Request}", request.Path);
+
 
                 if (!httpContext.User.Identity?.IsAuthenticated ?? false)
                 {

@@ -49,7 +49,6 @@ namespace EducationApp.Extensions
 
             // Inject services
             services.AddScoped<IStudentsService, StudentsService>();
-            services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICourseService, CourseService>();
             services.AddScoped<ICourseEnrollmentService, CourseEnrollmentService>();
             services.AddScoped<ILessonService, LessonService>();
@@ -60,7 +59,7 @@ namespace EducationApp.Extensions
             services.AddScoped<ISubscriptionPlanService, SubscriptionPlanService>();
             services.AddScoped<IPaymentService, PaymentService>();
 
-
+            services.AddHttpContextAccessor();
 
             return services;
         }

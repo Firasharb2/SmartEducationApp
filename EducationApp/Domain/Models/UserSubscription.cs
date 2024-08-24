@@ -19,7 +19,6 @@
         public bool IsActive { get; set; }
 
         // Navigation properties
-        public User User { get; set; }
         public SubscriptionPlan SubscriptionPlan { get; set; }
     }
 

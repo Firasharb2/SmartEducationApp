@@ -8,9 +8,9 @@ namespace EducationApp.Controllers
     using Microsoft.EntityFrameworkCore;
     using System.Linq;
     using System.Threading.Tasks;
-
-    [Route("api/[controller]")]
+   
     [ApiController]
+    [Route("course")]
     public class CourseController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -20,11 +20,10 @@ namespace EducationApp.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet("get-courses")]
         public async Task<IActionResult> GetCourses()
         {
-            var courses = await _context.Courses
-                .Include(c => c.Instructor) // Include related entities if needed
+            var courses = await _context.Courses// Include related entities if needed
                 .ToListAsync();
             return Ok(courses);
         }
@@ -33,7 +32,6 @@ namespace EducationApp.Controllers
         public async Task<IActionResult> GetCourse(int id)
         {
             var course = await _context.Courses
-                .Include(c => c.Instructor)
                 .FirstOrDefaultAsync(c => c.CourseId == id);
 
             if (course == null)
@@ -43,17 +41,27 @@ namespace EducationApp.Controllers
             return Ok(course);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateCourse([FromForm] Course course)
+        [HttpPost("create-course")]
+        public async Task<IActionResult> CreateCourse([FromBody] Course course)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return BadRequest(ModelState);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                _context.Courses.Add(course);
+                await _context.SaveChangesAsync();
+                return CreatedAtAction(nameof(GetCourse), new { id = course.CourseId }, course);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
             }
 
-            _context.Courses.Add(course);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetCourse), new { id = course.CourseId }, course);
         }
 
         [HttpPut("{id}")]

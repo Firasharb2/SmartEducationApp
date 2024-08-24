@@ -18,15 +18,16 @@ namespace EducationApp.Services
 
         public async Task<int> GetStudentsCount()
         {
-            try
-            {
-                var ss = await _appDbContext.Students.CountAsync();
-                return ss;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            return 1;
+            //try
+            //{
+            //    var ss = await _appDbContext.Students.CountAsync();
+            //    return ss;
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw;
+            //}
             
         }
 

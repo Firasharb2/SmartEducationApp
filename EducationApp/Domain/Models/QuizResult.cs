@@ -19,7 +19,6 @@
 
         // Navigation properties
         public Quiz Quiz { get; set; }
-        public User User { get; set; }
     }
 
 }

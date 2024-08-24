@@ -8,7 +8,6 @@
         [Key] // Primary Key
         public int AdminReportId { get; set; }
 
-        [ForeignKey("User")] // Foreign Key
         public int UserId { get; set; }
 
         public string ReportType { get; set; }
@@ -16,7 +15,6 @@
         public DateTime CreatedAt { get; set; }
 
         // Navigation property
-        public User User { get; set; }
     }
 
 }

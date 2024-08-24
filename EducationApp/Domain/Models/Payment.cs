@@ -21,7 +21,6 @@
         public bool IsSuccessful { get; set; }
 
         // Navigation properties
-        public User User { get; set; }
         public UserSubscription UserSubscription { get; set; }
     }
 

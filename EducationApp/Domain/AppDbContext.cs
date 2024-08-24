@@ -52,10 +52,7 @@
 //    }
 //}
 using EducationApp.Domain.Models;
-using EducationApp.Domain.Students;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
 namespace EducationApp.Domain
 {
@@ -69,22 +66,32 @@ namespace EducationApp.Domain
             _connectionString = configuration.GetConnectionString("DefaultConnection") ?? throw new ArgumentNullException(nameof(configuration), "Connection string is empty.");
             _logger = logger;
         }
-
+        //replaced
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    if (!optionsBuilder.IsConfigured)
+        //    {
+        //        optionsBuilder.UseNpgsql(_connectionString);
+        //    }
+        //}
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
+            if (!string.IsNullOrEmpty(_connectionString))
             {
-                optionsBuilder.UseNpgsql(_connectionString);
+                optionsBuilder.UseNpgsql(_connectionString, x => x.MigrationsAssembly(typeof(AppDbContext).Assembly.GetName().Name));
+                base.OnConfiguring(optionsBuilder);
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(_connectionString), "Connection string is empty.");
             }
         }
 
         //add entities here 
 
-        public virtual DbSet<Student> Students { get; set; }
-        public DbSet<User> Users { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<CourseEnrollment> CourseEnrollments { get; set; }
-        public DbSet<Category> Categories { get; set; }
+       // public DbSet<Category> Categories { get; set; }
         public DbSet<SocialAccount> SocialAccounts { get; set; }
         public DbSet<Lesson> Lessons { get; set; }
         public DbSet<Quiz> Quizzes { get; set; }

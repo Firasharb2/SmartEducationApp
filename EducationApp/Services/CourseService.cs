@@ -19,16 +19,12 @@
         public async Task<IEnumerable<Course>> GetCoursesAsync()
         {
             return await _context.Courses
-                .Include(c => c.Instructor)
-                .Include(c => c.Category)
                 .ToListAsync();
         }
 
         public async Task<Course> GetCourseByIdAsync(int id)
         {
             return await _context.Courses
-                .Include(c => c.Instructor)
-                .Include(c => c.Category)
                 .FirstOrDefaultAsync(c => c.CourseId == id);
         }
 
