@@ -14,17 +14,32 @@ namespace EducationApp.Controllers
     public class CourseController : ControllerBase
     {
         private readonly AppDbContext _context;
-
-        public CourseController(AppDbContext context)
+        private string _userId;
+        public CourseController(AppDbContext context,IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
+            _userId = httpContextAccessor?.HttpContext?.User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
+
         }
 
         [HttpGet("get-courses")]
         public async Task<IActionResult> GetCourses()
         {
-            var courses = await _context.Courses// Include related entities if needed
+            var courses = new List<Course>();
+                
+            var enrolledCources = await _context.CourseEnrollments.Where(c=>c.UserId == _userId).Select(c=>c.CourseId).ToListAsync();
+
+            if (enrolledCources.Count > 0)
+            {
+                courses = await _context.Courses.Where(c=>!enrolledCources.Contains(c.CourseId))// Include related entities if needed
                 .ToListAsync();
+            }
+            else
+            {
+                courses =  await _context.Courses// Include related entities if needed
+               .ToListAsync();
+            }
+
             return Ok(courses);
         }
 

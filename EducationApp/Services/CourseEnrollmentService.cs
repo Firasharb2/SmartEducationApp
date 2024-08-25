@@ -16,9 +16,9 @@
             _context = context;
         }
 
-        public async Task<IEnumerable<CourseEnrollment>> GetCourseEnrollmentsAsync()
+        public async Task<IEnumerable<CourseEnrollment>> GetCourseEnrollmentsAsync(string userId)
         {
-            return await _context.CourseEnrollments.ToListAsync();
+            return await _context.CourseEnrollments.Include(c=>c.Course).Where(c=>c.UserId == userId).ToListAsync();
         }
 
         public async Task<CourseEnrollment> GetCourseEnrollmentByIdAsync(int id)
@@ -28,9 +28,18 @@
 
         public async Task<CourseEnrollment> CreateCourseEnrollmentAsync(CourseEnrollment courseEnrollment)
         {
+            try
+            {
             _context.CourseEnrollments.Add(courseEnrollment);
             await _context.SaveChangesAsync();
             return courseEnrollment;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
         }
 
         public async Task<bool> UpdateCourseEnrollmentAsync(int id, CourseEnrollment courseEnrollment)

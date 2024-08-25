@@ -3,6 +3,7 @@ using System;
 using EducationApp.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EducationApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240825090420_changeusernametostring")]
+    partial class changeusernametostring
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,6 +80,7 @@ namespace EducationApp.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CourseEnrollmentId"));
 
                     b.Property<string>("CertificateUrl")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("CompletedAt")
@@ -85,10 +89,11 @@ namespace EducationApp.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime?>("EnrolledAt")
+                    b.Property<DateTime>("EnrolledAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Grade")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("UserId")

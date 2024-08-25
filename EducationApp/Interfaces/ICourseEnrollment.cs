@@ -6,7 +6,7 @@
 
     public interface ICourseEnrollmentService
     {
-        Task<IEnumerable<CourseEnrollment>> GetCourseEnrollmentsAsync();
+        Task<IEnumerable<CourseEnrollment>> GetCourseEnrollmentsAsync(string userId);
         Task<CourseEnrollment> GetCourseEnrollmentByIdAsync(int id);
         Task<CourseEnrollment> CreateCourseEnrollmentAsync(CourseEnrollment courseEnrollment);
         Task<bool> UpdateCourseEnrollmentAsync(int id, CourseEnrollment courseEnrollment);

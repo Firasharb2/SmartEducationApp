@@ -11,16 +11,15 @@
         [ForeignKey("Course")] // Foreign Key
         public int CourseId { get; set; }
 
-        [ForeignKey("User")] // Foreign Key
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
-        public DateTime EnrolledAt { get; set; }
-        public string Grade { get; set; }
-        public string CertificateUrl { get; set; }
+        public DateTime? EnrolledAt { get; set; }
+        public string? Grade { get; set; }
+        public string? CertificateUrl { get; set; }
         public DateTime? CompletedAt { get; set; }
 
         // Navigation properties
-        public Course Course { get; set; }
+        public Course? Course { get; set; }
     }
 
 }
