@@ -1,5 +1,5 @@
 ﻿namespace EducationApp.Middleware
-{
+{//cheching user session
     public class AutheticationMiddleware
     {
         private readonly RequestDelegate _next;

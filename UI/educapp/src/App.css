@@ -1,0 +1,366 @@
+.App {
+  text-align: center;
+}
+
+.layout {
+  display: flex;
+}
+
+.sidebar {.App {
+  text-align: center;
+}
+
+.layout {
+  display: flex;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #f8f9fa;
+  padding: 20px;
+  height: 100vh;
+  position: fixed;
+}
+
+.sidebar h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.main-content {
+  margin-left: 250px;
+  width: calc(100% - 250px);
+  padding: 20px;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.top-bar span {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  margin-bottom: 10px;
+}
+
+ul li a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: 500;
+}
+
+.page-content {
+  padding: 1px;
+}
+
+.custom-card {
+  margin-top: 1px;
+}
+
+  width: 250px;
+  background-color: #f8f9fa;
+  padding: 20px;
+  height: 100vh;
+  position: fixed;
+  transition: transform 0.3s ease;
+}
+
+.sidebar h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.main-content {
+  margin-left: 250px;
+  width: calc(100% - 250px);
+  padding: 20px;
+  transition: margin-left 0.3s ease;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.top-bar span {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  margin-bottom: 10px;
+}
+
+ul li a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: 500;
+}
+
+.page-content {
+  padding: 1px;
+}
+
+.custom-card {
+  margin-top: 1px;
+}
+
+
+/*MY +*/
+/* Styling the list of courses */
+.courses-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+/* Styling each course card */
+.course-card {
+  border: 1px solid #1ca2e5;
+  border-radius: 8px;
+  padding: 16px;
+  width: 300px;
+  text-align: center;
+  background-color: #5298e7;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Course image styling */
+.course-image {
+  max-width: 100%;
+  /* height: auto; */
+  height: 200px;
+  width: 250px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+/* Course name styling */
+.course-name {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 12px 0;
+  color: #333;
+}
+
+/* Course instructor name styling */
+.course-instructor {
+  font-size: 1em;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+/* Course price styling */
+.course-price {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #007bff;
+}
+
+/* Hover effect for course card */
+.course-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Add this to your App.css or a relevant CSS file */
+.search-input {
+  width: 100%;
+  max-width: 400px; /* Increase this value to make the input longer */
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #007ad9; /* Highlight the input border when focused */
+  box-shadow: 0 0 5px rgba(0, 122, 217, 0.5);
+}
+
+/* src/components/Footer.js */
+
+.footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+/* General styling for the container */
+.create-course-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Heading styling */
+.create-course-container h2 {
+  text-align: center;
+  color: #4A4A4A;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Form group styling */
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Label styling */
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333333;
+}
+
+/* Input field styling */
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #dcdcdc;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #4A4A4A;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s;
+}
+
+/* Input field focus state */
+.form-group input[type="text"]:focus,
+.form-group input[type="number"]:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: #007BFF;
+  outline: none;
+  background-color: #ffffff;
+}
+
+/* Textarea styling */
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Submit button styling */
+.submit-button {
+  width: 100%;
+  padding: 12px 20px;
+  background-color: #007BFF;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Submit button hover state */
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+/* Message styling */
+.message {
+  margin-top: 20px;
+  padding: 10px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Success message styling */
+.message.success {
+  color: #28a745;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  border-radius: 4px;
+}
+
+/* Error message styling */
+.message.error {
+  color: #dc3545;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+}
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+  .create-course-container {
+      padding: 15px;
+  }
+
+  .submit-button {
+      font-size: 14px;
+      padding: 10px;
+  }
+}
+
+/* Add this to your CSS file */
+.button {
+  background-color: #4CAF50; /* Green background */
+  color: white; /* White text */
+  padding: 10px 20px; /* Some padding */
+  border: none; /* Remove borders */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer/hand icon */
+  font-size: 16px; /* Increase font size */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+.button:active {
+  background-color: #3e8e41; /* Even darker green when pressed */
+}
+
+.button:focus {
+  outline: none; /* Remove outline on focus */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Add a shadow to indicate focus */
+}
